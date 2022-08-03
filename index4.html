@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <template>
+        <p v-if="number >= 10">
+          Wciśnij
+          <span :style="{ fontWeight: 700 }">Start</span>, aby rozpocząć
+          odliczanie.
+        </p>
+        <h1>{{ number }}</h1>
+        <button :disabled="number < 10" @click="countDown">Start</button>
+      </template>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          number: 10,
+        },
+        computed: {},
+        methods: {
+          countDown() {
+            this.number--;
+            if (this.number > 0) {
+              setTimeout(this.countDown, 1000);
+            } else {
+              setTimeout(() => {
+                this.number = 10;
+              }, 1000);
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
